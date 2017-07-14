@@ -727,11 +727,11 @@ class Compiler:
                 p.input_name = srcname
                 p.output_name = output
                 yield p
-        except (PermissionError, OSError):
+        except (PermissionError, OSError) as ex:
             # On Windows antivirus programs and the like hold on to files so
             # they can't be deleted. There's not much to do in this case. Also,
             # catch OSError because the directory is then no longer empty.
-            pass
+            raise ex
 
     def get_colorout_args(self, colortype):
         return []
