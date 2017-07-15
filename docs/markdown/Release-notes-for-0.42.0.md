@@ -58,3 +58,14 @@ Rust's [linkage reference][rust-linkage].
 
 Both the address- and undefined behavior sanitizers can now be used
 simultaneously by passing `-Db_sanitize=address,undefined` to Meson.
+
+## Added build_rpath keyword argument
+
+You can specify `build_rpath : '/foo/bar'` in build targets and the
+given path will get added to the target's rpath in the build tree. It
+is removed during the install step.
+
+Meson will print a warning when the user tries to add an rpath linker
+flag manually. This is not recommended because having multiple rpath
+causes them to stomp on each other. This warning will become a hard
+error in some future release.
